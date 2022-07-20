@@ -34,19 +34,78 @@ def save():
     finally:
         return jsonify(data), status
     
-    ...
+
+@bp_app.route('/', methods=['GET'])
+def select():
+     
+    try:
+        queryset = Character.query.all()
+    
+        data = [
+            {
+                "id": query.id,
+                "name": query.name,
+            }
+
+            for query in queryset
+        ]
+
+        if data:
+            status = 200
+        
+        else:
+            status = 202
+            data = {"message": "No content"}
 
 
-@bp_app.route('/update', methods=['POST'])
-def update():
-    ...
+    except:
+        data = {"message": "Error!"}
+        status = 400
+    
+    finally:
+        return jsonify(data), status
 
 
-@bp_app.route('/create', methods=['POST'])
-def create():
-    ...
+@bp_app.route('/<int:id>', methods=['GET'])
+def select_one(id):
+    try:
+        character = Character.query.get(id)
 
+        data = {
+            "id": character.id,
+            "name": character.name,
+        }
 
-@bp_app.route('/delete', methods=['POST'])
-def delete():
+        status = 200
+    
+    except:
+        data = dict()
+        status = 400
+    
+    finally:
+        return jsonify(data), status
+
+    
+@bp_app.route('/<int:id>', methods=['DELETE'])
+def destroy(id):
+    
+    try:
+        character = Character.query.filter_by(id=id).first()
+        db.session.delete(character)
+        db.session.commit()
+        
+        data = {
+            "message": "Success to deleting item",
+        }
+        status = 200
+
+    except:
+        data = {
+            "message": "Error to deleting item",
+        }
+        status = 400
+
+    finally:
+        return jsonify(data), status
+
     ...
