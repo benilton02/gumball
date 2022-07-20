@@ -1,5 +1,11 @@
 # gumball 
 
+#### WSGI Gunicorn
+production mode
+```sh
+gunicorn wsgi:app
+```
+
 ### Set FLASK variables:
 Development mode
 ```sh
