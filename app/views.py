@@ -19,15 +19,12 @@ def save():
     try: 
         character = Character(name=name)
         db.session.add(character)
-        print(11)
         db.session.commit()
-        print(12)
         
         data = {
             "id": character.id,
             "name": character.name,
         }
-        print(13)
         status=201
     
     except:
