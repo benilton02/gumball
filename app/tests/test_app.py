@@ -1,7 +1,7 @@
 from app.models import Character, db
 
 
-def test_save_200(client):
+def test_save_201(client):
     url = "/"
     payload = {
         "name": "flask"
@@ -12,7 +12,6 @@ def test_save_200(client):
     expected = 201
         
     assert result == expected
-    ...
     
 
 def test_select_200(client):
@@ -64,8 +63,30 @@ def test_select_one_200(client):
     response = client.get(url)
     result = response.status_code
     
-    assert result == expected
-    ...
+    assert result == expected 
     
 
+def test_destroy_200(client):
+    id = 15
+    url = f"/{id}"
+    expected = 200
     
+    character_test = Character(id=id, name='darwin')
+    db.session.add(character_test)
+    db.session.commit()
+    
+    response = client.delete(url)
+    result = response.status_code
+    
+    assert result == expected
+    
+
+def test_destroy_400(client):
+    id = 15
+    url = f"/{id}"
+    expected = 400
+      
+    response = client.delete(url)
+    result = response.status_code
+    
+    assert result == expected
