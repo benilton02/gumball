@@ -3,7 +3,7 @@ from app.models import Character
 from app.config_database import db
 import json
 
-bp_app = Blueprint('endpoint', __name__)
+bp_app = Blueprint('gumball', __name__)
 
 def configure(app):
     app.register_blueprint(bp_app)
@@ -26,7 +26,7 @@ def save():
             "name": character.name,
         }
         status=201
-    
+        
     except:
         data = dict()
         status = 400
@@ -56,7 +56,6 @@ def select():
         else:
             status = 202
             data = {"message": "No content"}
-
 
     except:
         data = {"message": "Error!"}
