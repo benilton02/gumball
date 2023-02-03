@@ -23,6 +23,15 @@ Set FLASK variables
 export FLASK_APP=app
 export FLASK_ENV=Development
 export FLASK_DEBUG=True
+
+```
+### To test 
+```sh
+export FLASK_APP='app:create_app("sqlite:///test.db")'
+```
+
+```sh
+pytest/app
 ```
 
 Run app
