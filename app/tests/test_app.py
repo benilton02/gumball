@@ -18,7 +18,6 @@ def test_create_author_and_book(client):
     result = response.status_code   
     expected = 201
     expected_keys = ['book', 'author', 'author_book']
-    
     for key in expected_keys:
         assert key in response.json.keys()    
     assert result == expected
@@ -102,7 +101,6 @@ def test_get_one_book_by_name(client):
     assert response.json[0]['name'] == name
 
 
-file_path = "app/test.db"
-
+file_path = "instance/test.db"
 if os.path.exists(file_path):
     os.remove(file_path)
